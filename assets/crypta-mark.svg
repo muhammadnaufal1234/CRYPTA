@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CRYPTA">
+  <defs>
+    <linearGradient id="ring" x1="0.3" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#1f6bff"/>
+      <stop offset="0.55" stop-color="#1238a8"/>
+      <stop offset="1" stop-color="#0a1847"/>
+    </linearGradient>
+    <linearGradient id="orbit" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#1450e0"/>
+      <stop offset="1" stop-color="#2f86ff"/>
+    </linearGradient>
+  </defs>
+  <!-- Heksagon berbentuk huruf C (terbuka di kanan) -->
+  <path d="M50.5 15.2 L32 4.5 L8.2 18.2 V45.8 L32 59.5 L50.5 48.8"
+        fill="none" stroke="url(#ring)" stroke-width="8.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Gembok -->
+  <path d="M26.2 30 V25.6 a5.8 5.8 0 0 1 11.6 0 V30" fill="none" stroke="#0d1a40" stroke-width="3.4" stroke-linecap="round"/>
+  <rect x="22.4" y="29" width="19.2" height="15.4" rx="2.8" fill="#0d1a40"/>
+  <circle cx="32" cy="35.4" r="2.3" fill="#ffffff"/>
+  <path d="M31 36.6 h2 l0.6 4.4 h-3.2 z" fill="#ffffff"/>
+  <!-- Orbit -->
+  <path d="M1.5 51.5 C7 63.5 47.5 50 63 18.5 C46.5 41.5 13.5 57.5 6.4 50.4 C4.9 48.9 5.4 46.2 8.4 43 C4 45.6 0.6 49.3 1.5 51.5 Z"
+        fill="url(#orbit)"/>
+</svg>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRYPTA: Pengaman Pesan dan File</title>
+  <meta name="description" content="Aplikasi web pengaman pesan dan file dengan AES-256-GCM, PBKDF2, dan SHA-256. Berjalan sepenuhnya di peramban tanpa server.">
+  <link rel="icon" type="image/svg+xml" href="assets/crypta-mark.svg">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero" id="beranda">
+    <div class="particles" aria-hidden="true"></div>
+
+    <nav class="topnav">
+      <a class="nav-brand" href="#beranda">
+        <span class="brand-mark"><img src="assets/crypta-mark.svg" alt="" width="34" height="34"></span>
+        <span class="brand-text"><b>CRYPTA</b><small>Secure Your Digital World</small></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#cara-kerja">Cara Kerja</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#pengujian">Pengujian</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="nav-icon" href="app.html#dashboard" title="Dashboard" aria-label="Buka dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        </a>
+        <a class="btn-pill accent" href="app.html">Buka Aplikasi</a>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="hero-main">
+      <div class="hero-badge-row">
+        <span class="hb-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <span class="hb-pill">Aman <i>•</i> Lokal <i>•</i> Tanpa Server</span>
+        <span class="hb-line" aria-hidden="true"></span>
+        <span class="hb-note">Satu aplikasi web untuk mengamankan pesan dan file Anda.</span>
+      </div>
+
+      <h1 class="hero-word"><span class="scramble">ENKRIPSI</span></h1>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h2 class="hero-sub">Pengaman Pesan &amp; File</h2>
+          <p class="hero-desc">Aplikasi web yang mengenkripsi pesan dan file dengan AES-256-GCM, menurunkan kunci dari kata sandi lewat PBKDF2, dan mengecek keutuhan file dengan SHA-256. Semuanya berjalan di peramban tanpa server.</p>
+          <div class="hero-btns">
+            <a class="btn-pill accent" href="app.html">Buka Aplikasi</a>
+            <a class="btn-pill light" href="#cara-kerja">Cara Kerja</a>
+          </div>
+
+          <h3 class="impact-title">Keamanan yang Bisa Diukur</h3>
+          <div class="stat-cards">
+            <div class="stat-card">
+              <div class="sc-top"><span class="sc-num" data-to="256" data-suffix="-bit">256-bit</span><span class="sc-label">Kunci AES</span></div>
+              <p>Panjang kunci AES-256-GCM, standar enkripsi NIST.</p>
+            </div>
+            <div class="stat-card">
+              <div class="sc-top"><span class="sc-num" data-to="200" data-suffix="K">200K</span><span class="sc-label">Iterasi PBKDF2</span></div>
+              <p>Setiap tebakan kata sandi diperlambat 200.000 kali.</p>
+            </div>
+            <div class="stat-card">
+              <div class="sc-top"><span class="sc-num">0 byte</span><span class="sc-label">Ke server</span></div>
+              <p>Pesan, file, dan kata sandi tidak pernah keluar dari peramban.</p>
+            </div>
+            <div class="stat-card">
+              <div class="sc-top"><span class="sc-num" data-to="6" data-suffix="/6">6/6</span><span class="sc-label">Uji lolos</span></div>
+              <p>Semua skenario pengujian proposal berhasil.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <svg class="iso-scene" viewBox="-165 -12 708 646" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi alur enkripsi: pengirim, PBKDF2, brankas AES-256-GCM, penerima"><defs>
+<linearGradient id="gTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d8fff"/><stop offset="1" stop-color="#3a63f0"/></linearGradient>
+<linearGradient id="gLeft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2451e6"/><stop offset="1" stop-color="#1a3cb8"/></linearGradient>
+<linearGradient id="gRight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b3fc0"/><stop offset="1" stop-color="#132d8c"/></linearGradient>
+</defs><polyline points="300.0,40.0 -254.3,360.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="300.0,40.0 854.3,360.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="334.6,60.0 -219.6,380.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="265.4,60.0 819.6,380.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="369.3,80.0 -185.0,400.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="230.7,80.0 785.0,400.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="403.9,100.0 -150.3,420.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="196.1,100.0 750.3,420.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="438.6,120.0 -115.7,440.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="161.4,120.0 715.7,440.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="473.2,140.0 -81.1,460.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="126.8,140.0 681.1,460.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="507.8,160.0 -46.4,480.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="92.2,160.0 646.4,480.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="542.5,180.0 -11.8,500.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="57.5,180.0 611.8,500.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="577.1,200.0 22.9,520.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="22.9,200.0 577.1,520.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="611.8,220.0 57.5,540.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-11.8,220.0 542.5,540.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="646.4,240.0 92.2,560.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-46.4,240.0 507.8,560.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="681.1,260.0 126.8,580.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-81.1,260.0 473.2,580.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="715.7,280.0 161.4,600.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-115.7,280.0 438.6,600.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="750.3,300.0 196.1,620.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-150.3,300.0 403.9,620.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="785.0,320.0 230.7,640.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-185.0,320.0 369.3,640.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="819.6,340.0 265.4,660.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-219.6,340.0 334.6,660.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="854.3,360.0 300.0,680.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><polyline points="-254.3,360.0 300.0,680.0" stroke="#e9ecf3" stroke-width=".7" fill="none"/><g><polygon points="161.4,200.0 334.6,300.0 334.6,282.0 161.4,182.0" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="473.2,220.0 334.6,300.0 334.6,282.0 473.2,202.0" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="300.0,102.0 473.2,202.0 334.6,282.0 161.4,182.0" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="126.8,340.0 300.0,440.0 300.0,422.0 126.8,322.0" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="438.6,360.0 300.0,440.0 300.0,422.0 438.6,342.0" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="265.4,242.0 438.6,342.0 300.0,422.0 126.8,322.0" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="92.2,480.0 265.4,580.0 265.4,562.0 92.2,462.0" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="403.9,500.0 265.4,580.0 265.4,562.0 403.9,482.0" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="230.7,382.0 403.9,482.0 265.4,562.0 92.2,462.0" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><path id="isoRoute" d="M 293.1 162.0 L 369.3 206.0 L 223.8 290.0 L 306.9 338.0 L 175.3 414.0 L 265.4 466.0 L 230.7 486.0" fill="none" stroke="#2451e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".25"/><path class="iso-flow" d="M 293.1 162.0 L 369.3 206.0 L 223.8 290.0 L 306.9 338.0 L 175.3 414.0 L 265.4 466.0 L 230.7 486.0" fill="none" stroke="#2451e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 7"/><polyline points="230.7,504.0 133.7,560.0 234.2,618.0" fill="none" stroke="#2451e6" stroke-width="1.2" opacity=".5"/><g><polygon points="255.0,156.0 303.5,184.0 303.5,179.2 255.0,151.2" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="341.6,162.0 303.5,184.0 303.5,179.2 341.6,157.2" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="293.1,129.2 341.6,157.2 303.5,179.2 255.0,151.2" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="255.0,151.2 259.1,153.6 259.1,119.6 255.0,117.2" fill="#13204a" stroke="#d9deea" stroke-width=".6"/><polygon points="297.2,131.6 259.1,153.6 259.1,119.6 297.2,97.6" fill="#0e1838" stroke="#d9deea" stroke-width=".6"/><polygon points="293.1,95.2 297.2,97.6 259.1,119.6 255.0,117.2" fill="#1b2a5c" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="289.6,228.0 320.8,246.0 320.8,210.0 289.6,192.0" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="352.0,228.0 320.8,246.0 320.8,210.0 352.0,192.0" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="320.8,174.0 352.0,192.0 320.8,210.0 289.6,192.0" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="300.0,192.0 320.8,204.0 320.8,196.8 300.0,184.8" fill="#1b3fc0" stroke="#d9deea" stroke-width=".6"/><polygon points="341.6,192.0 320.8,204.0 320.8,196.8 341.6,184.8" fill="#16329a" stroke="#d9deea" stroke-width=".6"/><polygon points="320.8,172.8 341.6,184.8 320.8,196.8 300.0,184.8" fill="#2451e6" stroke="#d9deea" stroke-width=".6"/></g><g class="iso-vault"><polygon points="241.1,312.0 296.5,344.0 296.5,280.0 241.1,248.0" fill="url(#gLeft)" stroke="#1b3fc0" stroke-width=".6"/><polygon points="352.0,312.0 296.5,344.0 296.5,280.0 352.0,248.0" fill="url(#gRight)" stroke="#1b3fc0" stroke-width=".6"/><polygon points="296.5,216.0 352.0,248.0 296.5,280.0 241.1,248.0" fill="url(#gTop)" stroke="#1b3fc0" stroke-width=".6"/></g><g><polygon points="206.5,448.0 248.0,472.0 248.0,467.2 206.5,443.2" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="282.7,452.0 248.0,472.0 248.0,467.2 282.7,447.2" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="241.1,423.2 282.7,447.2 248.0,467.2 206.5,443.2" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="206.5,443.2 210.6,445.6 210.6,413.6 206.5,411.2" fill="#13204a" stroke="#d9deea" stroke-width=".6"/><polygon points="245.3,425.6 210.6,445.6 210.6,413.6 245.3,393.6" fill="#0e1838" stroke="#d9deea" stroke-width=".6"/><polygon points="241.1,391.2 245.3,393.6 210.6,413.6 206.5,411.2" fill="#1b2a5c" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="217.6,189.6 223.8,193.2 223.8,173.2 217.6,169.6" fill="#bcc5d8" stroke="#d9deea" stroke-width=".6"/><polygon points="230.0,189.6 223.8,193.2 223.8,173.2 230.0,169.6" fill="#aab4ca" stroke="#d9deea" stroke-width=".6"/><polygon points="223.8,166.0 230.0,169.6 223.8,173.2 217.6,169.6" fill="#cfd6e6" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="186.4,335.6 192.6,339.2 192.6,319.2 186.4,315.6" fill="#bcc5d8" stroke="#d9deea" stroke-width=".6"/><polygon points="198.8,335.6 192.6,339.2 192.6,319.2 198.8,315.6" fill="#aab4ca" stroke="#d9deea" stroke-width=".6"/><polygon points="192.6,312.0 198.8,315.6 192.6,319.2 186.4,315.6" fill="#cfd6e6" stroke="#d9deea" stroke-width=".6"/></g><g><polygon points="321.5,481.6 327.7,485.2 327.7,465.2 321.5,461.6" fill="#bcc5d8" stroke="#d9deea" stroke-width=".6"/><polygon points="333.9,481.6 327.7,485.2 327.7,465.2 333.9,461.6" fill="#aab4ca" stroke="#d9deea" stroke-width=".6"/><polygon points="327.7,458.0 333.9,461.6 327.7,465.2 321.5,461.6" fill="#cfd6e6" stroke="#d9deea" stroke-width=".6"/></g><g transform="translate(324.2,300.0) skewY(-30)" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="-2" y="-6" width="16" height="13" rx="2" fill="#fff" fill-opacity=".18"/><path d="M1 -6 V-10 a5 5 0 0 1 10 0 V-6"/></g><g class="iso-packet"><g><polygon points="0,-9 8,-5 0,-1 -8,-5" fill="#5b82ff"/><polygon points="-8,-5 0,-1 0,6 -8,2" fill="#1b3fc0"/><polygon points="0,-1 8,-5 8,2 0,6" fill="#2451e6"/></g><animateMotion dur="6.6s" begin="0s" repeatCount="indefinite" rotate="0"><mpath href="#isoRoute"/></animateMotion></g><g class="iso-packet"><g><polygon points="0,-9 8,-5 0,-1 -8,-5" fill="#5b82ff"/><polygon points="-8,-5 0,-1 0,6 -8,2" fill="#1b3fc0"/><polygon points="0,-1 8,-5 8,2 0,6" fill="#2451e6"/></g><animateMotion dur="6.6s" begin="-2.2s" repeatCount="indefinite" rotate="0"><mpath href="#isoRoute"/></animateMotion></g><g class="iso-packet"><g><polygon points="0,-9 8,-5 0,-1 -8,-5" fill="#5b82ff"/><polygon points="-8,-5 0,-1 0,6 -8,2" fill="#1b3fc0"/><polygon points="0,-1 8,-5 8,2 0,6" fill="#2451e6"/></g><animateMotion dur="6.6s" begin="-4.4s" repeatCount="indefinite" rotate="0"><mpath href="#isoRoute"/></animateMotion></g><g class="iso-float-a"><g><polygon points="-94.9,268.0 -46.4,296.0 -46.4,240.0 -94.9,212.0" fill="url(#gLeft)" stroke="#1b3fc0" stroke-width=".6"/><polygon points="2.1,268.0 -46.4,296.0 -46.4,240.0 2.1,212.0" fill="url(#gRight)" stroke="#1b3fc0" stroke-width=".6"/><polygon points="-46.4,184.0 2.1,212.0 -46.4,240.0 -94.9,212.0" fill="url(#gTop)" stroke="#1b3fc0" stroke-width=".6"/></g></g><g class="iso-float-b"><g><polygon points="144.1,114.0 182.2,136.0 182.2,92.0 144.1,70.0" fill="#eef1f7" stroke="#d9deea" stroke-width=".6"/><polygon points="220.3,114.0 182.2,136.0 182.2,92.0 220.3,70.0" fill="#e1e6f0" stroke="#d9deea" stroke-width=".6"/><polygon points="182.2,48.0 220.3,70.0 182.2,92.0 144.1,70.0" fill="#ffffff" stroke="#d9deea" stroke-width=".6"/></g></g><g class="iso-pin" transform="translate(300.0,118.0)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#2451e6" stroke-width="1.4" stroke-dasharray="2 2"/><g class="pin-float"><rect x="-40.4" y="-52" width="80.8" height="24" rx="12" fill="#fff" stroke="#d9deea"/><circle cx="-27.4" cy="-40" r="8" fill="#2451e6"/><text x="-27.4" y="-36.5" text-anchor="middle" font-size="9" fill="#fff">✉</text><text x="-14.4" y="-36" font-size="10.5" font-weight="700" fill="#1a1f2e">Pengirim</text></g><circle r="3.2" fill="#2451e6"/></g><g class="iso-pin" transform="translate(320.8,184.0)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#2451e6" stroke-width="1.4" stroke-dasharray="2 2"/><g class="pin-float"><rect x="-33.8" y="-52" width="67.6" height="24" rx="12" fill="#fff" stroke="#d9deea"/><circle cx="-20.8" cy="-40" r="8" fill="#2451e6"/><text x="-20.8" y="-36.5" text-anchor="middle" font-size="9" fill="#fff">⚿</text><text x="-7.8" y="-36" font-size="10.5" font-weight="700" fill="#1a1f2e">PBKDF2</text></g><circle r="3.2" fill="#2451e6"/></g><g class="iso-pin" transform="translate(296.5,248.0)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#2451e6" stroke-width="1.4" stroke-dasharray="2 2"/><g class="pin-float"><rect x="-50.3" y="-52" width="100.6" height="24" rx="12" fill="#fff" stroke="#d9deea"/><circle cx="-37.3" cy="-40" r="8" fill="#2451e6"/><text x="-37.3" y="-36.5" text-anchor="middle" font-size="9" fill="#fff">🔒</text><text x="-24.3" y="-36" font-size="10.5" font-weight="700" fill="#1a1f2e">AES-256-GCM</text></g><circle r="3.2" fill="#2451e6"/></g><g class="iso-pin" transform="translate(248.0,414.0)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#2451e6" stroke-width="1.4" stroke-dasharray="2 2"/><g class="pin-float"><rect x="-40.4" y="-52" width="80.8" height="24" rx="12" fill="#fff" stroke="#d9deea"/><circle cx="-27.4" cy="-40" r="8" fill="#2451e6"/><text x="-27.4" y="-36.5" text-anchor="middle" font-size="9" fill="#fff">✓</text><text x="-14.4" y="-36" font-size="10.5" font-weight="700" fill="#1a1f2e">Penerima</text></g><circle r="3.2" fill="#2451e6"/></g><g class="iso-pin" transform="translate(223.8,522.0)"><line x1="0" y1="0" x2="0" y2="-26" stroke="#2451e6" stroke-width="1.4" stroke-dasharray="2 2"/><g class="pin-float"><rect x="-63.5" y="-52" width="127.0" height="24" rx="12" fill="#fff" stroke="#d9deea"/><circle cx="-50.5" cy="-40" r="8" fill="#2451e6"/><text x="-50.5" y="-36.5" text-anchor="middle" font-size="9" fill="#fff">#</text><text x="-37.5" y="-36" font-size="10.5" font-weight="700" fill="#1a1f2e">salt ‖ IV ‖ tag</text></g><circle r="3.2" fill="#2451e6"/></g></svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= TENTANG ================= -->
+  <section class="about" id="tentang">
+    <svg class="curve curve-a" viewBox="0 0 600 900" fill="none" aria-hidden="true"><path d="M520 0C380 120 600 260 420 380S120 520 260 680 80 860 40 900"/></svg>
+    <h2 class="section-heading">Tentang Aplikasi</h2>
+
+    <div class="feature">
+      <div class="feature-visual">
+        <span class="feature-block"></span>
+        <div class="phone" data-mock="dashboard"></div>
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Dashboard</span>
+        <h3>Satu Tempat untuk Semua Proses Kriptografi</h3>
+        <p>Dashboard merangkum semua aktivitas dalam sesi ini: jumlah enkripsi, dekripsi, hash, dan percobaan yang gagal. Riwayat hanya menyimpan metadata, tanpa kata sandi, isi pesan, atau kunci, dan terhapus otomatis saat tab ditutup.</p>
+        <a class="btn btn-dark" href="app.html#dashboard">Lihat Dashboard</a>
+      </div>
+    </div>
+
+    <div class="feature reverse">
+      <div class="feature-visual">
+        <span class="feature-block"></span>
+        <div class="phone" data-mock="teks"></div>
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Amankan Pesan</span>
+        <h3>Ubah Pesan Rahasia Menjadi Teks Acak</h3>
+        <p>Ketik pesan dan kata sandi, lalu salin hasil Base64-nya ke aplikasi chat atau surel. Hanya orang yang tahu kata sandinya yang bisa membacanya kembali. Pesan yang sama selalu menghasilkan ciphertext berbeda karena salt dan IV-nya acak.</p>
+        <a class="btn btn-outline" href="app.html#teks">Enkripsi Pesan</a>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-visual">
+        <span class="feature-block"></span>
+        <div class="phone" data-mock="file"></div>
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Amankan File</span>
+        <h3>Kunci File Apa Pun Menjadi .enc</h3>
+        <p>Dokumen, gambar, atau PDF hingga 50 MB dienkripsi langsung di perangkat Anda. File tidak pernah diunggah ke mana pun. Saat didekripsi, authentication tag diverifikasi, jadi file yang sudah dirusak atau diubah langsung ditolak.</p>
+        <a class="btn btn-outline" href="app.html#file">Enkripsi File</a>
+      </div>
+    </div>
+
+    <div class="feature reverse">
+      <div class="feature-visual">
+        <span class="feature-block"></span>
+        <div class="phone" data-mock="hash"></div>
+      </div>
+      <div class="feature-text">
+        <span class="eyebrow">Cek Keutuhan</span>
+        <h3>Pastikan File Tidak Berubah dengan SHA-256</h3>
+        <p>Hitung sidik digital SHA-256 sebuah file, lalu bandingkan dengan hash yang diberikan pengirim atau dengan file lain. Perubahan satu bit saja menghasilkan hash yang benar-benar berbeda.</p>
+        <a class="btn btn-outline" href="app.html#hash">Cek Hash File</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CARA KERJA ================= -->
+  <section class="how" id="cara-kerja">
+    <span class="deco ring ring-b" aria-hidden="true"></span>
+    <h2 class="section-heading">Cara Kerja</h2>
+    <p class="section-sub">Apa yang sebenarnya terjadi di balik setiap klik tombol. Pilih prosesnya untuk melihat langkah-langkahnya.</p>
+
+    <div class="flow-tabs" role="tablist">
+      <button class="flow-tab active" role="tab" aria-selected="true" data-flow="enkripsi">
+        <span class="ft-dot bg-blue"></span>Enkripsi
+      </button>
+      <button class="flow-tab" role="tab" aria-selected="false" data-flow="dekripsi">
+        <span class="ft-dot bg-green"></span>Dekripsi
+      </button>
+      <button class="flow-tab" role="tab" aria-selected="false" data-flow="hash">
+        <span class="ft-dot bg-purple"></span>Cek Hash
+      </button>
+    </div>
+
+    <!-- ===== Alur enkripsi ===== -->
+    <div class="flow" id="flow-enkripsi" role="tabpanel">
+      <p class="flow-intro"><b>Tujuan:</b> mengubah pesan atau file menjadi data acak yang hanya bisa dibuka oleh orang yang tahu kata sandinya.</p>
+      <ol class="flow-steps">
+        <li class="flow-step">
+          <span class="fs-num">1</span>
+          <div class="fs-body">
+            <h4>Pengguna memasukkan data dan kata sandi</h4>
+            <p>Pesan teks diubah menjadi deretan byte (UTF-8). File dibaca langsung sebagai byte. Kata sandi hanya disimpan di memori selama proses berjalan.</p>
+            <div class="fs-chip">"Halo" → <code>48 61 6c 6f</code></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">2</span>
+          <div class="fs-body">
+            <h4>Membangkitkan salt dan IV acak</h4>
+            <p>Peramban membuat <b>salt 16 byte</b> dan <b>IV (nonce) 12 byte</b> dengan generator acak kriptografis (<code>crypto.getRandomValues</code>). Keduanya selalu baru setiap kali enkripsi, sehingga pesan yang sama tidak pernah menghasilkan ciphertext yang sama.</p>
+            <div class="fs-chip"><span class="tag-salt">salt</span> <code>9f2c41…a71e</code> <span class="tag-iv">IV</span> <code>4be0d2…13d8</code></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">3</span>
+          <div class="fs-body">
+            <h4>Menurunkan kunci dengan PBKDF2</h4>
+            <p>Kata sandi tidak dipakai langsung sebagai kunci. Kata sandi dan salt diolah dengan <b>PBKDF2-HMAC-SHA256 sebanyak 200.000 kali</b> sampai menjadi kunci AES 256 bit. Proses yang sengaja lambat ini membuat penyerang hanya bisa mencoba sedikit tebakan per detik.</p>
+            <div class="fs-chip">kata sandi + salt → <b>200.000×</b> HMAC-SHA256 → <span class="tag-key">kunci 256-bit</span></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">4</span>
+          <div class="fs-body">
+            <h4>Enkripsi dengan AES-256-GCM</h4>
+            <p>Data dienkripsi dengan AES-256 dalam mode <b>GCM</b>. Hasilnya ada dua: <b>ciphertext</b> (data teracak, panjangnya sama dengan data asli) dan <b>authentication tag 16 byte</b>, semacam segel yang dihitung dari ciphertext dan kunci.</p>
+            <div class="fs-chip">plaintext + kunci + IV → <span class="tag-ct">ciphertext</span> + <span class="tag-tag">tag</span></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">5</span>
+          <div class="fs-body">
+            <h4>Menyusun paket keluaran</h4>
+            <p>Salt, IV, dan ciphertext+tag digabung menjadi satu paket. Untuk teks, paket diubah ke <b>Base64</b> supaya bisa disalin ke chat atau surel. Untuk file, paket disimpan sebagai berkas <b>.enc</b>. Salt dan IV boleh terlihat orang lain karena keduanya bukan rahasia. Rahasianya hanya kata sandi.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ===== Alur dekripsi ===== -->
+    <div class="flow" id="flow-dekripsi" role="tabpanel" hidden>
+      <p class="flow-intro"><b>Tujuan:</b> mengembalikan data asli, sekaligus memastikan data tidak diubah sedikit pun sejak dienkripsi.</p>
+      <ol class="flow-steps">
+        <li class="flow-step">
+          <span class="fs-num">1</span>
+          <div class="fs-body">
+            <h4>Pengguna memasukkan paket dan kata sandi</h4>
+            <p>Teks Base64 diubah kembali menjadi byte, atau file .enc dibaca sebagai byte. Data yang terlalu pendek atau Base64 yang rusak langsung ditolak.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">2</span>
+          <div class="fs-body">
+            <h4>Memecah paket</h4>
+            <p>Karena formatnya tetap, aplikasi tahu persis di mana tiap bagian berada: <b>16 byte pertama</b> adalah salt, <b>12 byte berikutnya</b> adalah IV, dan sisanya adalah ciphertext beserta tag.</p>
+            <div class="fs-chip"><span class="tag-salt">byte 0–15</span> <span class="tag-iv">byte 16–27</span> <span class="tag-ct">byte 28–…</span></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">3</span>
+          <div class="fs-body">
+            <h4>Menurunkan ulang kunci</h4>
+            <p>Kata sandi yang diketik dan salt dari paket diolah lagi dengan PBKDF2 200.000 iterasi. Kata sandi dan salt yang sama pasti menghasilkan kunci yang sama. Kata sandi berbeda menghasilkan kunci yang sama sekali lain.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">4</span>
+          <div class="fs-body">
+            <h4>Dekripsi dan verifikasi tag</h4>
+            <p>AES-GCM menghitung ulang tag dari ciphertext dan kunci, lalu mencocokkannya dengan tag di paket. Perubahan <b>satu bit saja</b> di ciphertext, tag, IV, atau salt membuat tag tidak cocok.</p>
+            <div class="fs-branch">
+              <div class="branch ok"><b>✓ Tag cocok</b><span>Plaintext ditampilkan atau file asli diunduh.</span></div>
+              <div class="branch bad"><b>✗ Tag tidak cocok</b><span>Muncul pesan galat dan tidak ada data yang dikeluarkan.</span></div>
+            </div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">5</span>
+          <div class="fs-body">
+            <h4>Kenapa kata sandi salah dan data rusak tidak dibedakan?</h4>
+            <p>Dua-duanya membuat tag tidak cocok, dan memang sengaja tidak dibedakan. Penyerang jadi tidak mendapat petunjuk apa pun tentang bagian mana yang salah.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ===== Alur hash ===== -->
+    <div class="flow" id="flow-hash" role="tabpanel" hidden>
+      <p class="flow-intro"><b>Tujuan:</b> memastikan sebuah file tidak berubah, misalnya file yang diunduh atau hasil dekripsi. Hash tidak memakai kata sandi dan tidak bisa dibalik.</p>
+      <ol class="flow-steps">
+        <li class="flow-step">
+          <span class="fs-num">1</span>
+          <div class="fs-body">
+            <h4>Memilih file</h4>
+            <p>File dibaca sebagai deretan byte di peramban. File tidak diunggah ke mana pun.</p>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">2</span>
+          <div class="fs-body">
+            <h4>Menghitung SHA-256</h4>
+            <p>Seluruh byte file diproses fungsi hash <b>SHA-256</b> dan menghasilkan sidik digital 256 bit, ditampilkan sebagai 64 karakter heksadesimal. File sekecil atau sebesar apa pun selalu menghasilkan panjang yang sama.</p>
+            <div class="fs-chip">file → SHA-256 → <code>3a7bd3e2…42dd4f1b</code></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">3</span>
+          <div class="fs-body">
+            <h4>Efek longsoran (avalanche)</h4>
+            <p>Mengubah satu bit saja pada file menghasilkan hash yang benar-benar berbeda, bukan sekadar mirip. Karena itu perubahan sekecil apa pun pasti terlihat.</p>
+            <div class="fs-chip mono-block"><span>"abc" → ba7816bf8f01cfea…</span><span>"abd" → a52d159f262b2c6d…</span></div>
+          </div>
+        </li>
+        <li class="flow-step">
+          <span class="fs-num">4</span>
+          <div class="fs-body">
+            <h4>Membandingkan hash</h4>
+            <p>Hash dibandingkan dengan hash yang ditempel pengguna (misalnya dari pengirim) atau dengan hash file kedua.</p>
+            <div class="fs-branch">
+              <div class="branch ok"><b>✓ COCOK</b><span>File identik, tidak berubah.</span></div>
+              <div class="branch bad"><b>✗ BEDA</b><span>File sudah berubah atau rusak.</span></div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="packet">
+      <span class="packet-title">Format paket terenkripsi</span>
+      <div class="packet-bar">
+        <span class="seg seg-salt">salt · 16 B</span>
+        <span class="seg seg-iv">IV · 12 B</span>
+        <span class="seg seg-ct">ciphertext</span>
+        <span class="seg seg-tag">tag · 16 B</span>
+      </div>
+      <p>Ukuran paket selalu sama dengan ukuran data asli ditambah 44 byte (16 salt + 12 IV + 16 tag).</p>
+    </div>
+  </section>
+
+  <!-- ================= DEMO LANGSUNG ================= -->
+  <section class="demo" id="demo">
+    <h2 class="section-heading small">Coba Langsung</h2>
+    <p class="section-sub">Ketik pesan dan kata sandi, lalu lihat setiap nilai yang dihasilkan. Semua dihitung sungguhan di peramban Anda.</p>
+
+    <div class="demo-card">
+      <div class="demo-inputs">
+        <label for="demo-msg">Pesan</label>
+        <input type="text" id="demo-msg" value="Halo, ini pesan rahasia!" maxlength="120">
+        <label for="demo-pw">Kata sandi</label>
+        <input type="text" id="demo-pw" value="rahasia123" maxlength="64">
+        <button id="demo-run" class="btn btn-dark demo-run">Jalankan enkripsi</button>
+        <p class="demo-hint">Klik berkali-kali: salt, IV, dan hasilnya selalu berubah.</p>
+      </div>
+
+      <div class="demo-output" id="demo-output">
+        <div class="demo-empty">Hasil setiap langkah akan tampil di sini.</div>
+      </div>
+    </div>
+
+    <div class="demo-tests" id="demo-tests" hidden>
+      <h4>Uji paket di atas</h4>
+      <div class="demo-test-btns">
+        <button class="btn btn-outline" data-test="ok">Dekripsi dengan kata sandi benar</button>
+        <button class="btn btn-outline" data-test="wrong">Dekripsi dengan kata sandi salah</button>
+        <button class="btn btn-outline" data-test="tamper">Ubah 1 bit ciphertext, lalu dekripsi</button>
+      </div>
+      <div class="demo-verdict" id="demo-verdict" hidden></div>
+    </div>
+  </section>
+
+  <!-- ================= ISTILAH & KEAMANAN ================= -->
+  <section class="glossary">
+    <h2 class="section-heading small">Istilah Penting</h2>
+    <p class="section-sub">Kamus singkat untuk memahami cara kerja aplikasi.</p>
+    <dl class="gloss-grid">
+      <div><dt>Plaintext</dt><dd>Data asli yang masih bisa dibaca, misalnya pesan atau isi file.</dd></div>
+      <div><dt>Ciphertext</dt><dd>Hasil enkripsi berupa data acak yang tidak bisa dibaca tanpa kunci.</dd></div>
+      <div><dt>AES-256</dt><dd>Standar enkripsi simetris dari NIST dengan blok 128 bit dan kunci 256 bit. Kunci yang sama dipakai untuk enkripsi dan dekripsi.</dd></div>
+      <div><dt>GCM</dt><dd>Mode operasi AES yang sekaligus mengenkripsi dan menghasilkan tag autentikasi, jadi data sekaligus dirahasiakan dan dijaga keutuhannya.</dd></div>
+      <div><dt>PBKDF2</dt><dd>Fungsi yang mengubah kata sandi menjadi kunci dengan HMAC berulang ribuan kali, sehingga tebakan brute force menjadi lambat.</dd></div>
+      <div><dt>Salt</dt><dd>Nilai acak 16 byte yang dicampur ke kata sandi. Mencegah serangan tabel pelangi (rainbow table), karena kata sandi yang sama menghasilkan kunci berbeda.</dd></div>
+      <div><dt>IV / Nonce</dt><dd>Nilai acak 12 byte yang wajib unik untuk setiap enkripsi dengan kunci yang sama. Membuat ciphertext selalu berbeda.</dd></div>
+      <div><dt>Authentication tag</dt><dd>Segel 16 byte dari GCM. Jika ada data yang diubah, tag tidak cocok dan dekripsi ditolak.</dd></div>
+      <div><dt>SHA-256</dt><dd>Fungsi hash satu arah yang menghasilkan sidik digital 256 bit. Dipakai untuk mengecek keutuhan file.</dd></div>
+      <div><dt>Base64</dt><dd>Cara menulis data biner sebagai teks (A–Z, a–z, 0–9, +, /) supaya bisa disalin. Base64 bukan enkripsi.</dd></div>
+    </dl>
+
+    <h2 class="section-heading small why-heading">Kenapa Aman?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon bg-blue">🔑</span>
+        <h5>Kunci tidak pernah disimpan</h5>
+        <p>Kunci dibuat ulang dari kata sandi setiap kali dibutuhkan. Tidak ada kunci atau kata sandi yang tersimpan.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon bg-green">🐢</span>
+        <h5>Tebakan dibuat lambat</h5>
+        <p>200.000 iterasi PBKDF2 membuat setiap tebakan kata sandi butuh waktu, sehingga brute force sangat mahal.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon bg-purple">🛡️</span>
+        <h5>Manipulasi terdeteksi</h5>
+        <p>Tag GCM memastikan data yang diubah satu bit pun langsung ditolak, tidak diam-diam menghasilkan data rusak.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon bg-orange">💻</span>
+        <h5>Tanpa server</h5>
+        <p>Semua proses berjalan di peramban dengan Web Crypto API. Tidak ada data yang dikirim, jadi tidak ada yang bisa bocor dari server.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEKNOLOGI ================= -->
+  <section class="tech">
+    <h2 class="section-heading small">Teknologi yang Digunakan</h2>
+    <p class="section-sub">Hanya memakai pustaka kriptografi bawaan peramban yang sudah teruji. Tidak ada algoritma buatan sendiri.</p>
+    <div class="marquee">
+      <ul class="tech-list">
+        <li>AES-256-GCM</li>
+        <li>PBKDF2</li>
+        <li>HMAC-SHA256</li>
+        <li>SHA-256</li>
+        <li>Web Crypto API</li>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>JavaScript</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= HASIL PENGUJIAN ================= -->
+  <section class="tests" id="pengujian">
+    <h2 class="section-heading small">Hasil Pengujian</h2>
+    <p class="section-sub">Skenario dari proposal projek, diuji otomatis dengan <code>node --test</code>.</p>
+    <div class="test-grid">
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Dekripsi dengan kata sandi benar</h5><p>Teks kembali persis seperti semula.</p></div></div>
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Kata sandi salah</h5><p>Muncul pesan galat, tidak ada keluaran.</p></div></div>
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Ciphertext diubah 1 karakter</h5><p>Dekripsi ditolak karena tag tidak valid.</p></div></div>
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Enkripsi teks yang sama dua kali</h5><p>Ciphertext berbeda karena salt dan IV acak.</p></div></div>
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Enkripsi &amp; dekripsi file</h5><p>File hasil identik byte demi byte.</p></div></div>
+      <div class="test-card"><span class="check">&#10003;</span><div><h5>Hash file asli vs hasil dekripsi</h5><p>Nilai SHA-256 sama persis.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" id="faq">
+    <svg class="curve curve-b" viewBox="0 0 600 700" fill="none" aria-hidden="true"><path d="M600 40C420 60 300 200 420 320S560 560 300 620 40 560 0 700"/></svg>
+    <span class="deco half-ring" aria-hidden="true"></span>
+    <h2 class="section-heading small">Pertanyaan Umum</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Apakah data saya dikirim ke server?</summary>
+        <p>Tidak. Semua proses berjalan di peramban memakai Web Crypto API. Halaman tidak melakukan permintaan jaringan apa pun dengan data Anda.</p>
+      </details>
+      <details>
+        <summary>Bagaimana jika saya lupa kata sandi?</summary>
+        <p>Data tidak bisa dipulihkan. Kata sandi tidak disimpan di mana pun, dan tanpa kata sandi kunci AES tidak bisa diturunkan kembali. Simpan kata sandi Anda dengan baik.</p>
+      </details>
+      <details>
+        <summary>Kenapa mengenkripsi pesan yang sama hasilnya selalu berbeda?</summary>
+        <p>Setiap enkripsi memakai salt dan IV acak yang baru. Ini disengaja agar penyerang tidak bisa mengenali pesan yang sama dari ciphertext-nya.</p>
+      </details>
+      <details>
+        <summary>Apa bedanya enkripsi dengan hash?</summary>
+        <p>Enkripsi bisa dibalik dengan kata sandi yang benar. Gunanya merahasiakan isi. Hash tidak bisa dibalik dan tidak memakai kata sandi. Gunanya memastikan file tidak berubah.</p>
+      </details>
+      <details>
+        <summary>Berapa ukuran file maksimal?</summary>
+        <p>Aplikasi diuji untuk file hingga sekitar 50 MB, karena seluruh file diproses di memori peramban.</p>
+      </details>
+      <details>
+        <summary>Apakah aplikasi ini siap dipakai untuk data produksi?</summary>
+        <p>Aplikasi ini bersifat edukatif untuk mata kuliah Kriptografi dan belum melalui audit keamanan tingkat produksi.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= PROJEK AKADEMIK ================= -->
+  <section class="academic" id="projek">
+    <div class="academic-card">
+      <div class="academic-logo">
+        <img src="assets/logo-upb.png" alt="Logo Universitas Pelita Bangsa" width="180" height="163">
+      </div>
+      <div class="academic-info">
+        <span class="eyebrow">Projek Akademik</span>
+        <h3>Projek Mata Kuliah Kriptografi</h3>
+        <p class="academic-uni">Universitas Pelita Bangsa · 2026</p>
+        <dl class="academic-meta">
+          <div><dt>Disusun oleh</dt><dd>Muhammad Naufal Fathuroni</dd></div>
+          <div><dt>NIM</dt><dd>312410346</dd></div>
+          <div><dt>Dosen pengampu</dt><dd>Ahmad Turmudi Zy, S.Kom, M.Kom.</dd></div>
+          <div><dt>Algoritma</dt><dd>AES-256-GCM · PBKDF2 · SHA-256</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-wrap">
+    <div class="cta-banner">
+      <span class="deco ring ring-c" aria-hidden="true"></span>
+      <div>
+        <h3>Siap mengamankan pesan dan file Anda?</h3>
+        <p>Tanpa instalasi dan tanpa akun. Buka aplikasinya dan mulai enkripsi dalam hitungan detik.</p>
+      </div>
+      <a class="btn btn-white" href="app.html">Buka Aplikasi &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <a class="foot-brand" href="#beranda"><img src="assets/crypta-mark.svg" alt="" width="30" height="30">CRYPTA</a>
+        <p>Aplikasi pengaman pesan dan file berbasis web. Projek mata kuliah Kriptografi, Universitas Pelita Bangsa.</p>
+      </div>
+      <div>
+        <h6>Aplikasi</h6>
+        <ul>
+          <li><a href="app.html#dashboard">Dashboard</a></li>
+          <li><a href="app.html#teks">Amankan Pesan</a></li>
+          <li><a href="app.html#file">Amankan File</a></li>
+          <li><a href="app.html#hash">Cek Keutuhan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Pelajari</h6>
+        <ul>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#cara-kerja">Cara Kerja</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Penyusun</h6>
+        <ul class="plain">
+          <li>Muhammad Naufal Fathuroni</li>
+          <li>NIM 312410346</li>
+          <li>Dosen: Ahmad Turmudi Zy, S.Kom, M.Kom.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 CRYPTA · Projek Kriptografi · Universitas Pelita Bangsa</div>
+  </footer>
+
+  <script src="js/crypto-core.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>
