@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk · CRYPTA</title>
+  <script>
+    try {
+      var t = localStorage.getItem('kripto.theme');
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="assets/crypta-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-body">
+  <div class="login-layout">
+    <!-- PANEL MEREK -->
+    <aside class="login-brand">
+      <a class="lb-logo" href="index.html">
+        <span class="lb-mark"><img src="assets/crypta-mark.svg" alt="" width="32" height="32"></span>
+        <span><b>CRYPTA</b><small>Secure Your Digital World</small></span>
+      </a>
+
+      <div class="lb-copy">
+        <h1>Amankan pesan dan file Anda, langsung di peramban.</h1>
+        <p>Masuk untuk membuka aplikasi enkripsi CRYPTA. Semua proses berjalan lokal tanpa server.</p>
+        <ul class="lb-points">
+          <li><span>🔒</span>AES-256-GCM untuk enkripsi dan deteksi manipulasi</li>
+          <li><span>🔑</span>Kata sandi login disimpan sebagai hash PBKDF2, bukan teks asli</li>
+          <li><span>💻</span>Tidak ada data yang dikirim ke server</li>
+        </ul>
+      </div>
+
+      <div class="lb-packet" aria-hidden="true">
+        <span class="seg seg-salt">salt</span><span class="seg seg-iv">IV</span><span class="seg seg-ct">ciphertext</span><span class="seg seg-tag">tag</span>
+      </div>
+      <span class="lb-ring lb-ring-a" aria-hidden="true"></span>
+      <span class="lb-ring lb-ring-b" aria-hidden="true"></span>
+    </aside>
+
+    <!-- PANEL FORM -->
+    <main class="login-main">
+      <div class="login-top">
+        <a class="back-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Halaman utama
+        </a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+
+      <div class="login-card">
+        <img class="lc-mark" src="assets/crypta-mark.svg" alt="" width="52" height="52">
+        <h2 id="login-title">Masuk ke CRYPTA</h2>
+        <p class="muted" id="login-subtitle">Gunakan akun yang sudah Anda daftarkan di peramban ini.</p>
+
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" role="tab" aria-selected="true" data-mode="masuk">Masuk</button>
+          <button class="auth-tab" role="tab" aria-selected="false" data-mode="daftar">Daftar</button>
+        </div>
+
+        <div id="auth-status" class="status" hidden></div>
+
+        <!-- FORM MASUK -->
+        <form id="form-masuk" class="auth-form" novalidate>
+          <label for="login-username">Nama pengguna</label>
+          <input type="text" id="login-username" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="mis. naufal" required>
+
+          <label for="login-password">Kata sandi</label>
+          <div class="password-row">
+            <input type="password" id="login-password" autocomplete="current-password" placeholder="Masukkan kata sandi" required>
+            <button type="button" class="btn-ghost toggle-pw" data-target="login-password">Tampilkan</button>
+          </div>
+
+          <button type="submit" class="btn primary auth-submit">Masuk</button>
+
+          <button type="button" class="link-btn" id="forgot-link">Lupa kata sandi?</button>
+          <div class="forgot-box" id="forgot-box" hidden>
+            <p>Karena tanpa server, kata sandi login tidak bisa dipulihkan. Anda bisa <b>menghapus akun lokal</b> lalu mendaftar ulang. File dan pesan yang sudah dienkripsi <b>tidak terpengaruh</b>, karena masing-masing memakai kata sandi enkripsinya sendiri.</p>
+            <button type="button" class="btn-ghost danger" id="delete-account">Hapus akun lokal</button>
+          </div>
+        </form>
+
+        <!-- FORM DAFTAR -->
+        <form id="form-daftar" class="auth-form" novalidate hidden>
+          <label for="reg-nama">Nama lengkap</label>
+          <input type="text" id="reg-nama" autocomplete="name" placeholder="mis. Muhammad Naufal" required>
+
+          <label for="reg-username">Nama pengguna</label>
+          <input type="text" id="reg-username" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="huruf kecil, angka, . _ -" required>
+
+          <label for="reg-password">Kata sandi</label>
+          <div class="password-row">
+            <input type="password" id="reg-password" autocomplete="new-password" placeholder="Minimal 8 karakter" required>
+            <button type="button" class="btn-ghost toggle-pw" data-target="reg-password">Tampilkan</button>
+          </div>
+          <div class="strength" aria-live="polite">
+            <div class="strength-bar"><i id="strength-fill"></i></div>
+            <span id="strength-label">Kekuatan kata sandi</span>
+          </div>
+
+          <label for="reg-confirm">Konfirmasi kata sandi</label>
+          <input type="password" id="reg-confirm" autocomplete="new-password" placeholder="Ulangi kata sandi" required>
+
+          <button type="submit" class="btn primary auth-submit">Buat akun</button>
+        </form>
+
+        <p class="auth-note">
+          Akun disimpan <b>lokal di peramban ini</b>. Kata sandi disimpan sebagai hash
+          PBKDF2-HMAC-SHA256 (200.000 iterasi + salt acak), bukan teks aslinya.
+          Sesi berakhir otomatis saat tab ditutup.
+        </p>
+      </div>
+
+      <p class="login-foot">Projek Kriptografi · Universitas Pelita Bangsa</p>
+    </main>
+  </div>
+
+  <script src="js/crypto-core.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

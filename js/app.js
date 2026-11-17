@@ -10,39 +10,22 @@
   const MAX_FILE_SIZE = 50 * 1024 * 1024;
   const $ = (id) => document.getElementById(id);
 
-  // ---------- Tema gelap / terang ----------
-  // Tanpa pilihan manual, tema mengikuti pengaturan sistem.
-  // Pilihan manual disimpan di localStorage (hanya preferensi tampilan).
-
-  const THEME_KEY = 'kripto.theme';
   const root = document.documentElement;
-  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-  const themeToggle = $('theme-toggle');
 
-  function currentTheme() {
-    return root.getAttribute('data-theme') || (systemDark.matches ? 'dark' : 'light');
+  // ---------- Pengguna yang sedang masuk ----------
+
+  const sesi = window.Auth && window.Auth.session();
+  if (sesi) {
+    $('user-name').textContent = sesi.nama;
+    $('user-avatar').textContent = sesi.nama.trim().charAt(0).toUpperCase();
+    $('user-chip').title = 'Masuk sebagai @' + sesi.username;
+    $('user-chip').hidden = false;
   }
 
-  function renderThemeToggle() {
-    const dark = currentTheme() === 'dark';
-    themeToggle.classList.toggle('is-dark', dark);
-    themeToggle.setAttribute('aria-label', dark ? 'Ganti ke tema terang' : 'Ganti ke tema gelap');
-    themeToggle.title = themeToggle.getAttribute('aria-label');
-  }
-
-  themeToggle.addEventListener('click', () => {
-    const next = currentTheme() === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try {
-      localStorage.setItem(THEME_KEY, next);
-    } catch (e) {
-      // Penyimpanan tidak tersedia: tema tetap berlaku sampai halaman ditutup.
-    }
-    renderThemeToggle();
+  $('logout').addEventListener('click', () => {
+    window.Auth.logout();
+    location.replace('login.html');
   });
-
-  systemDark.addEventListener('change', renderThemeToggle);
-  renderThemeToggle();
 
   // ---------- Sidebar bisa diciutkan (hanya ikon) ----------
 

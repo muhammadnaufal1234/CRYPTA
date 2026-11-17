@@ -131,6 +131,21 @@
     return { text, details };
   }
 
+  /**
+   * Hash kata sandi akun login dengan PBKDF2-HMAC-SHA256 (256 bit, hex).
+   * Dipakai untuk menyimpan kata sandi login tanpa menyimpan teks aslinya.
+   */
+  async function hashPassword(password, salt, iterations = ITERATIONS) {
+    if (!password) throw new CryptoError('Kata sandi tidak boleh kosong.');
+    const baseKey = await subtle.importKey(
+      'raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']
+    );
+    const bits = await subtle.deriveBits(
+      { name: 'PBKDF2', salt, iterations, hash: 'SHA-256' }, baseKey, 256
+    );
+    return toHex(new Uint8Array(bits));
+  }
+
   /** Hash SHA-256 dalam format heksadesimal (F-05). */
   async function sha256Hex(bytes) {
     return toHex(new Uint8Array(await subtle.digest('SHA-256', bytes)));
@@ -172,7 +187,7 @@
     SALT_LEN, IV_LEN, TAG_LEN, ITERATIONS,
     CryptoError,
     deriveKey, encryptBytes, decryptBytes,
-    encryptText, decryptText, sha256Hex,
+    encryptText, decryptText, sha256Hex, hashPassword,
     toHex, bytesToBase64, base64ToBytes,
   };
 

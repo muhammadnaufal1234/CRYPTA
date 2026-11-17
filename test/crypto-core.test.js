@@ -71,6 +71,24 @@ test('SHA-256 sesuai vektor uji standar', async () => {
   );
 });
 
+test('Hash kata sandi login: deterministik per salt, berbeda untuk salt/sandi lain', async () => {
+  const salt = new Uint8Array(16).fill(7);
+  const a = await K.hashPassword('rahasia-login', salt);
+  const b = await K.hashPassword('rahasia-login', salt);
+  const c = await K.hashPassword('rahasia-login', new Uint8Array(16).fill(8));
+  const d = await K.hashPassword('rahasia-lain', salt);
+  assert.match(a, /^[0-9a-f]{64}$/);
+  assert.equal(a, b);
+  assert.notEqual(a, c);
+  assert.notEqual(a, d);
+  await assert.rejects(K.hashPassword('', salt), K.CryptoError);
+});
+
+test('Hash kata sandi login sesuai vektor uji PBKDF2-HMAC-SHA256 (RFC 7914)', async () => {
+  const hex = await K.hashPassword('passwd', new TextEncoder().encode('salt'), 1);
+  assert.equal(hex, '55ac046e56e3089fec1691c22544b605f94185216dde0465e68b9d57c20dacbc');
+});
+
 test('Validasi masukan: kata sandi kosong, Base64 rusak, data terlalu pendek', async () => {
   await assert.rejects(K.encryptText('pesan', ''), K.CryptoError);
   await assert.rejects(K.decryptText('bukan base64!!', PASSWORD), K.CryptoError);

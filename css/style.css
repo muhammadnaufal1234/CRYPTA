@@ -619,3 +619,47 @@ body, .card, .stat, .sidebar, .quick-card, textarea, input {
 @media (max-width: 760px) {
   .sidebar-toggle { display: none; }
 }
+
+/* ---------- Pengguna & keluar ---------- */
+
+.topbar { align-items: center; gap: 8px; }
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 220px;
+  margin-right: 2px;
+  padding: 4px 12px 4px 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.user-chip[hidden] { display: none; }
+.user-avatar {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.user-name {
+  overflow: hidden;
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#logout svg { width: 17px; height: 17px; color: var(--muted); }
+#logout:hover svg { color: var(--red); }
+#logout:hover { border-color: var(--red); transform: none; }
+
+@media (max-width: 760px) {
+  .user-name { display: none; }
+  .user-chip { padding: 3px; }
+}
