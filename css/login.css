@@ -163,7 +163,6 @@
   cursor: pointer;
 }
 .auth-tab.active { background: var(--card); color: var(--text); box-shadow: var(--shadow), 0 2px 8px -4px rgba(16, 24, 40, 0.25); }
-.auth-tabs[hidden] { display: none; }
 
 .auth-form[hidden] { display: none; }
 .auth-submit { width: 100%; margin-top: 20px; padding: 12px; }

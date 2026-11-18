@@ -163,6 +163,7 @@
     });
     history.replaceState(null, '', '#' + name);
     window.scrollTo(0, 0);
+    if (name === 'pengguna') renderUsers();
   }
 
   document.querySelectorAll('.tab').forEach((tab) => {
@@ -240,6 +241,112 @@
   $('history-clear').addEventListener('click', () => A.clear());
   A.subscribe(renderDashboard);
   renderDashboard();
+
+  // ---------- Pengguna & riwayat login ----------
+
+  function formatWaktu(iso) {
+    if (!iso) return '-';
+    return new Date(iso).toLocaleString('id-ID', {
+      day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+    });
+  }
+
+  function userCell(nama, username) {
+    const wrap = document.createElement('div');
+    wrap.className = 'user-cell';
+    const avatar = document.createElement('span');
+    avatar.className = 'user-avatar small';
+    avatar.textContent = (nama || username || '?').trim().charAt(0).toUpperCase();
+    const text = document.createElement('div');
+    const b = document.createElement('b');
+    b.textContent = nama || '(tidak dikenal)';
+    const small = document.createElement('small');
+    small.textContent = '@' + username;
+    text.append(b, small);
+    wrap.append(avatar, text);
+    return wrap;
+  }
+
+  function renderUsers() {
+    const AKSI = {
+      daftar: ['Daftar', 'enkripsi'],
+      masuk: ['Masuk', 'ok'],
+      keluar: ['Keluar', 'hash'],
+      gagal: ['Gagal', 'err'],
+      terkunci: ['Terkunci', 'err'],
+      hapus: ['Akun dihapus', 'err'],
+    };
+    const Auth = window.Auth;
+    if (!Auth) return;
+    const current = Auth.session();
+    const accounts = Auth.getAccounts();
+    const history = Auth.loginHistory();
+
+    $('u-stat-akun').textContent = accounts.length;
+    $('u-stat-masuk').textContent = history.filter((h) => h.aksi === 'masuk').length;
+    $('u-stat-gagal').textContent = history.filter((h) => h.aksi === 'gagal' || h.aksi === 'terkunci').length;
+    $('u-stat-aktif').textContent = current ? '@' + current.username : '-';
+
+    const body = $('users-body');
+    body.innerHTML = '';
+    accounts.forEach((acc) => {
+      const tr = document.createElement('tr');
+      const isMe = current && current.username === acc.username;
+      cell(tr, userCell(acc.nama, acc.username));
+      cell(tr, formatWaktu(acc.dibuat), 'nowrap');
+      cell(tr, formatWaktu(acc.terakhirMasuk), 'nowrap');
+      const code = document.createElement('code');
+      code.className = 'hash-snippet';
+      code.textContent = acc.hash.slice(0, 8) + '…' + acc.hash.slice(-6);
+      code.title = 'salt ' + acc.salt + ' · ' + acc.iterasi.toLocaleString('id-ID') + ' iterasi';
+      cell(tr, code);
+      cell(tr, isMe ? pill('Sedang aktif', 'ok') : pill('Tidak aktif', 'hash'));
+
+      const action = cell(tr, '');
+      if (!isMe) {
+        const del = document.createElement('button');
+        del.className = 'btn-ghost small danger-ghost';
+        del.textContent = 'Hapus';
+        let armed = false;
+        del.addEventListener('click', () => {
+          if (!armed) {
+            armed = true;
+            del.textContent = 'Yakin?';
+            setTimeout(() => {
+              armed = false;
+              del.textContent = 'Hapus';
+            }, 3000);
+            return;
+          }
+          Auth.deleteAccount(acc.username);
+          renderUsers();
+        });
+        action.appendChild(del);
+      }
+      body.appendChild(tr);
+    });
+
+    const hBody = $('login-history-body');
+    hBody.innerHTML = '';
+    $('login-history-empty').hidden = history.length > 0;
+    $('login-history-table').hidden = history.length === 0;
+    history.slice(0, 30).forEach((h) => {
+      const tr = document.createElement('tr');
+      cell(tr, formatWaktu(h.waktu), 'nowrap');
+      cell(tr, userCell(h.nama, h.username));
+      const [label, cls] = AKSI[h.aksi] || [h.aksi, 'hash'];
+      cell(tr, pill(label, cls));
+      cell(tr, h.keterangan || '-');
+      hBody.appendChild(tr);
+    });
+  }
+
+  $('login-history-clear').addEventListener('click', () => {
+    window.Auth.clearHistory();
+    renderUsers();
+  });
+
+  renderUsers();
 
   document.querySelectorAll('.toggle-pw').forEach((btn) => {
     btn.addEventListener('click', () => {

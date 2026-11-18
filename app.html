@@ -55,6 +55,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>
           <span>Hash</span>
         </button>
+        <button class="tab" role="tab" data-tab="pengguna" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Pengguna</span>
+        </button>
       </nav>
 
       <div class="sidebar-foot">
@@ -288,6 +292,67 @@
           </div>
 
           <div id="hash-status" class="status" hidden></div>
+        </div>
+      </section>
+
+      <!-- TAB PENGGUNA -->
+      <section id="tab-pengguna" class="view" role="tabpanel" hidden>
+        <header class="page-head">
+          <div>
+            <h1>Pengguna</h1>
+            <p class="muted">Akun yang terdaftar dan riwayat login di peramban ini.</p>
+          </div>
+        </header>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Akun terdaftar</span>
+            <span class="stat-value" id="u-stat-akun">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Login berhasil</span>
+            <span class="stat-value c-green" id="u-stat-masuk">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Login gagal</span>
+            <span class="stat-value c-red" id="u-stat-gagal">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Sedang aktif</span>
+            <span class="stat-value c-blue" id="u-stat-aktif">-</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2 class="section-title">Akun terdaftar</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th>Pengguna</th><th>Terdaftar</th><th>Terakhir masuk</th><th>Hash sandi (PBKDF2)</th><th>Status</th><th></th></tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+          <p class="hint">Kata sandi tidak disimpan. Kolom hash hanya menampilkan potongan hash PBKDF2-HMAC-SHA256 (200.000 iterasi + salt acak) sebagai bukti.</p>
+        </div>
+
+        <div class="card user-history">
+          <div class="card-head">
+            <h2 class="section-title">Riwayat login</h2>
+            <button id="login-history-clear" class="btn-ghost small">Hapus riwayat</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table" id="login-history-table">
+              <thead>
+                <tr><th>Waktu</th><th>Pengguna</th><th>Aktivitas</th><th>Keterangan</th></tr>
+              </thead>
+              <tbody id="login-history-body"></tbody>
+            </table>
+          </div>
+          <p id="login-history-empty" class="empty">Belum ada riwayat login.</p>
+          <p class="hint">Riwayat dan akun hanya berlaku di peramban ini, karena aplikasi berjalan tanpa server.</p>
         </div>
       </section>
 

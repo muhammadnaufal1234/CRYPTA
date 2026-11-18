@@ -38,19 +38,19 @@
     $('login-title').textContent = masuk ? 'Masuk ke CRYPTA' : 'Buat akun CRYPTA';
     $('login-subtitle').textContent = masuk
       ? 'Gunakan akun yang sudah Anda daftarkan di peramban ini.'
-      : 'Akun dibuat sekali dan disimpan lokal di peramban ini.';
+      : 'Setiap pengguna bisa membuat akun sendiri di peramban ini.';
     statusEl.hidden = true;
     (masuk ? $('login-username') : $('reg-nama')).focus();
   }
 
   function refreshForAccount() {
-    const acc = A.getAccount();
-    // Hanya satu akun lokal per peramban: pilihan Daftar disembunyikan jika sudah ada akun.
-    document.querySelector('.auth-tabs').hidden = !!acc;
-    if (acc) {
-      $('login-username').value = acc.username;
+    if (A.getAccounts().length) {
       setMode('masuk');
-      $('login-password').focus();
+      const last = A.lastUsername();
+      if (last && A.getAccount(last)) {
+        $('login-username').value = last;
+        $('login-password').focus();
+      }
     } else {
       setMode('daftar');
     }
@@ -112,21 +112,28 @@
   });
 
   deleteBtn.addEventListener('click', () => {
+    const username = $('login-username').value.trim().toLowerCase();
+    if (!username || !A.getAccount(username)) {
+      showStatus('err', 'Isi nama pengguna akun yang ingin dihapus pada kolom di atas.');
+      $('login-username').focus();
+      return;
+    }
     if (!confirmDelete) {
       confirmDelete = true;
-      deleteBtn.textContent = 'Yakin? Klik sekali lagi untuk menghapus';
+      deleteBtn.textContent = 'Yakin hapus @' + username + '? Klik sekali lagi';
       setTimeout(() => {
         confirmDelete = false;
         deleteBtn.textContent = 'Hapus akun lokal';
       }, 4000);
       return;
     }
-    A.deleteAccount();
+    A.deleteAccount(username);
     $('forgot-box').hidden = true;
     confirmDelete = false;
     deleteBtn.textContent = 'Hapus akun lokal';
+    $('login-username').value = '';
     refreshForAccount();
-    showStatus('info', 'Akun lokal sudah dihapus. Silakan daftar ulang.');
+    showStatus('info', 'Akun @' + username + ' sudah dihapus. Silakan daftar ulang.');
   });
 
   // ---------- Daftar ----------
@@ -157,10 +164,13 @@
           password: $('reg-password').value,
           confirm: $('reg-confirm').value,
         });
+        const baru = $('reg-username').value.trim().toLowerCase();
         formDaftar.reset();
         $('strength-fill').className = '';
         $('strength-label').textContent = 'Kekuatan kata sandi';
-        refreshForAccount();
+        setMode('masuk');
+        $('login-username').value = baru;
+        $('login-password').focus();
         showStatus('ok', 'Akun berhasil dibuat. Silakan masuk dengan kata sandi Anda.');
       } catch (err) {
         showStatus('err', message(err));

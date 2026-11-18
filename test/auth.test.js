@@ -34,8 +34,8 @@ test.beforeEach(() => {
 
 test('Daftar menyimpan hash PBKDF2 + salt, bukan kata sandi asli', async () => {
   await A.register(AKUN);
-  const raw = localStorage.getItem('kripto.akun');
-  const acc = JSON.parse(raw);
+  const raw = localStorage.getItem('kripto.akun-list');
+  const acc = JSON.parse(raw)[0];
   assert.equal(acc.username, 'naufal');
   assert.match(acc.salt, /^[0-9a-f]{32}$/);
   assert.match(acc.hash, /^[0-9a-f]{64}$/);
@@ -64,7 +64,7 @@ test('Sandi salah ditolak; setelah 5 kali gagal login dikunci', async () => {
     await assert.rejects(A.login('naufal', 'salah-' + i), /Sisa percobaan: \d/);
   }
   await assert.rejects(A.login('naufal', 'salah-5'), /dikunci/);
-  assert.ok(A.lockRemaining() > 0);
+  assert.ok(A.lockRemaining('naufal') > 0);
   // Saat terkunci, sandi yang benar pun ditolak.
   await assert.rejects(A.login('naufal', AKUN.password), /Coba lagi dalam/);
   assert.equal(A.session(), null);
@@ -75,12 +75,55 @@ test('Nama pengguna salah ditolak meski sandi benar', async () => {
   await assert.rejects(A.login('orang-lain', AKUN.password), A.AuthError);
 });
 
-test('Hapus akun lokal menghapus akun dan sesi', async () => {
+test('Hapus akun lokal menghapus akun dan sesinya saja', async () => {
   await A.register(AKUN);
+  await A.register({ ...AKUN, nama: 'Budi', username: 'budi' });
   await A.login('naufal', AKUN.password);
-  A.deleteAccount();
-  assert.equal(A.getAccount(), null);
+  A.deleteAccount('naufal');
+  assert.equal(A.getAccount('naufal'), null);
+  assert.ok(A.getAccount('budi'));
   assert.equal(A.session(), null);
+});
+
+test('Banyak akun: nama pengguna unik, masing-masing bisa masuk', async () => {
+  await A.register(AKUN);
+  await A.register({ nama: 'Budi Santoso', username: 'budi', password: 'Budi#12345', confirm: 'Budi#12345' });
+  await assert.rejects(A.register({ ...AKUN, nama: 'Lain' }), /sudah dipakai/);
+  assert.equal(A.getAccounts().length, 2);
+  await A.login('budi', 'Budi#12345');
+  assert.equal(A.session().nama, 'Budi Santoso');
+  // Sandi akun lain tidak bisa dipakai.
+  A.logout();
+  await assert.rejects(A.login('budi', AKUN.password), A.AuthError);
+});
+
+test('Riwayat login mencatat daftar, gagal, masuk, dan keluar', async () => {
+  await A.register(AKUN);
+  await assert.rejects(A.login('naufal', 'salah-sandi'));
+  await A.login('naufal', AKUN.password);
+  A.logout();
+  const aksi = A.loginHistory().map((h) => h.aksi);
+  assert.deepEqual(aksi, ['keluar', 'masuk', 'gagal', 'daftar']);
+  assert.ok(A.getAccount('naufal').terakhirMasuk);
+  assert.equal(A.lastUsername(), 'naufal');
+  A.clearHistory();
+  assert.equal(A.loginHistory().length, 0);
+});
+
+test('Kunci gagal login berlaku per pengguna', async () => {
+  await A.register(AKUN);
+  await A.register({ nama: 'Budi', username: 'budi', password: 'Budi#12345', confirm: 'Budi#12345' });
+  for (let i = 0; i < 5; i++) await assert.rejects(A.login('naufal', 'salah'));
+  assert.ok(A.lockRemaining('naufal') > 0);
+  assert.equal(A.lockRemaining('budi'), 0);
+  await A.login('budi', 'Budi#12345');
+});
+
+test('Migrasi akun tunggal versi lama ke daftar akun', () => {
+  localStorage.setItem('kripto.akun', JSON.stringify({ nama: 'Lama', username: 'lama', salt: '00', hash: '00', iterasi: 1 }));
+  assert.equal(A.getAccounts().length, 1);
+  assert.equal(A.getAccount('lama').nama, 'Lama');
+  assert.equal(localStorage.getItem('kripto.akun'), null);
 });
 
 test('Redirect setelah masuk hanya ke halaman aplikasi', () => {
